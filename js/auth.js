@@ -22,35 +22,6 @@ onAuthStateChanged(auth, async (user) => {
 
       if (profTitle) profTitle.innerText = `${userData?.role} Profile`
       if (adminTab && userData?.role !== "admin")adminTab.style.display = "none";
-
-
-      ///////////////// profile Data
-      let uname = document?.querySelector("#uname");
-      let email = document?.querySelector("#email");
-      let contact = document?.querySelector("#contact");
-      let age = document?.querySelector("#age");
-      let bio = document?.querySelector("#bio");
-      let image = document?.querySelector("#profile-img");
-
-      if (userData) {
-        if (uname) uname.value = userData?.name;
-        if (contact) contact.value = userData?.contact;
-        if (age) age.value = userData?.age;
-        if (bio) bio.value = userData?.bio || "add bio here";
-        if (email) email.innerHTML = userData?.email;
-        if (image && userData?.profImage) image.src =userData?.profImage;
-
-      }
-
-
-    } else {
-      console.log("No such document!");
     }
-  } else {
-    // console.log("sign out");
-    if (window.location.pathname === "/html/profile.html") {
-      window.location.replace("/html/login.html");
-    }
-
   }
-})
+});

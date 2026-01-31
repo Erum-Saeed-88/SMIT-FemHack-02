@@ -108,24 +108,7 @@ document
   .getElementById("forget-paswd")
   ?.addEventListener("click", forgetPassword);
 
-//////////////////////// Reset Password
 
-const ResetPassword = async () => {
-  try {
-    const user = auth.currentUser;
-    const newPassword = document.getElementById("new-pswd").value;
-    if (newPassword && newPassword.length >= 6) {
-      await updatePassword(user, newPassword);
-      alert("Password Update Successfully!");
-    } else {
-      alert("Enter atleast 6 characters");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-document.getElementById("reset-btn")?.addEventListener("click", ResetPassword);
 
 ///////////////////////////////  Logout
 
@@ -153,7 +136,7 @@ document
   ?.addEventListener("click", signInWithGoogle);
 
 
-////////////////////////////// Update Profile
+////////////////////////////// Update
 
 
 
@@ -171,7 +154,7 @@ inputs.forEach((input) => {
 })
 
 
-const ids = ['name', 'email', 'phone', 'cnic', 'address', 'nationality', 'education', 'experience', 'skills'];
+const ids = ['name', 'email', 'phone', 'cnic', 'address', 'nationality', 'education', 'experience', 'skill'];
 
 const elements = ids.map(id => document.getElementById(id));
 
@@ -220,6 +203,13 @@ if (!form || !resumeDisplayElement) {
 
         console.log('Generated image HTML:', imageHTML);
 
+        // Delete resume
+        function deleteResume(index) {
+            resumes.splice(index, 1);
+            localStorage.setItem('resumes', JSON.stringify(resumes));
+            renderResumes();
+        }
+
         // Create resume output
         const resumeHTML = `
             <h2>RESUME</h2>
@@ -241,6 +231,7 @@ if (!form || !resumeDisplayElement) {
             
             <h3>Skills:</h3>
             <p contenteditable="true">${skills}</p>
+            
         `;
 
         console.log('Generated resume HTML:', resumeHTML);

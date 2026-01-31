@@ -5,11 +5,7 @@
 }
 
 body {
-    background-image: url(blue-background.webp);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
+
     font-family: 'Roboto', sans-serif;
     
 }
@@ -125,7 +121,7 @@ button:hover{
 
 #resumeOutput {
 
-    max-width: 600px;
+    max-width: 60%;
     margin: auto;
     border: 2px solid rgb(80, 76, 80) ;
     border-radius: 8px;
