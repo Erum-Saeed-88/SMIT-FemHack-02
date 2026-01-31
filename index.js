@@ -152,46 +152,8 @@ document
   .getElementById("google-btn")
   ?.addEventListener("click", signInWithGoogle);
 
-// //////////////// Real time db
-
-// console.log("Hello >>>>>>>>>>> ");
-
-// async function writeUserData(userId, name, email, contact) {
-
-//  try {
-//    await set(ref(database, 'users/' + userId), {
-//     username: name,
-//     email: email,
-//     contact
-//   });
-//  } catch (error) {
-//   console.log("Error in users >>>>> ",error);
-
-//  }
-// }
-// writeUserData(1, "Ruhama Gull", "ruhama@gmail.com", 659899545);
-
-
-
 
 ////////////////////////////// Update Profile
-
-
-// const updateProfile = async () => {
-//   const name = document.getElementById("uname").value;
-
-//   try {
-//     const userRef = doc(db, "users", auth.currentUser.uid);
-// await updateDoc(userRef, {
-//   name
-// });
-//   } catch (error) {
-//     console.log(error);
-
-//   }
-// }
-
-// document.getElementById("uname")?.addEventListener("blur", updateProfile);
 
 
 
@@ -209,14 +171,94 @@ inputs.forEach((input) => {
 })
 
 
-///////////////////////// 
+const ids = ['name', 'email', 'phone', 'cnic', 'address', 'nationality', 'education', 'experience', 'skills'];
+
+const elements = ids.map(id => document.getElementById(id));
+
+elements.forEach((element, index) => {
+    if (!element) {
+        console.error(`Element with ID '${ids[index]}' not found.`);
+    }
+});
+
+const form = document.getElementById('resumeform');
+const resumeDisplayElement = document.getElementById('resumeOutput');
+
+if (!form || !resumeDisplayElement) {
+    console.error('Form or resume display element is missing.');
+} else {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent page reload
+
+        // Getting input values safely
+        const fileInput = document.getElementById('profilePicture');
+        let profilePictureURL = '';
+
+        const name = document.getElementById('name')?.value || '';
+        const email = document.getElementById('email')?.value || '';
+        const phone = document.getElementById('phone')?.value || '';
+        const cnic = document.getElementById('cnic')?.value || '';
+        const address = document.getElementById('address')?.value || '';
+        const nationality = document.getElementById('nationality')?.value || '';
+        const education = document.getElementById('education')?.value || '';
+        const experience = document.getElementById('experience')?.value || '';
+        const skills = document.getElementById('skill')?.value || ''; // Note: ID is 'skill' as per your code
+
+        // Handle profile picture
+        if (fileInput && fileInput.files && fileInput.files.length > 0) {
+            const profilePictureFile = fileInput.files[0];
+            profilePictureURL = URL.createObjectURL(profilePictureFile);
+            console.log('Profile picture URL:', profilePictureURL);
+        } else {
+            console.log('No profile picture selected.');
+        }
+
+        // Generate image HTML
+        const imageHTML = profilePictureURL
+            ? `<img src="${profilePictureURL}" alt="Profile Picture" class="profilePicture" style="max-width: 150px; height: auto;">`
+            : '';
+
+        console.log('Generated image HTML:', imageHTML);
+
+        // Create resume output
+        const resumeHTML = `
+            <h2>RESUME</h2>
+            <br>
+            ${imageHTML}  <!-- Insert the profile picture here -->
+            <h3>Personal Information</h3> 
+            <p><strong>Name:</strong><span contenteditable="true"> ${name} </span></p>
+            <p><strong>Email:</strong><span contenteditable="true"> ${email} </span></p>
+            <p><strong>Number:</strong><span contenteditable="true"> ${phone} </span></p>
+            <p><strong>CNIC:</strong><span contenteditable="true"> ${cnic} </span></p>
+            <p><strong>Address:</strong><span contenteditable="true"> ${address} </span></p>
+            <p><strong>Nationality:</strong><span contenteditable="true"> ${nationality} </span></p>
+            
+            <h3>Education:</h3>
+            <p contenteditable="true">${education}</p>
+
+            <h3>Experience:</h3>
+            <p contenteditable="true">${experience}</p>
+            
+            <h3>Skills:</h3>
+            <p contenteditable="true">${skills}</p>
+        `;
+
+        console.log('Generated resume HTML:', resumeHTML);
+
+        // Display the resume
+        resumeDisplayElement.innerHTML = resumeHTML;
+    });
+}
 
 
-const uploadImage = async () => {
+///////////////////////// profile image
+
+
+/*const uploadImage = async () => {
   const file = document.getElementById("image");
   const selectedImg = file.files[0];
   const cloudName = "da9vibnc0";
-  const presetName = "batch-16";
+  const presetName = "";
 
   const formData = new FormData();
   formData.append("file", selectedImg);
@@ -250,14 +292,14 @@ const uploadImage = async () => {
 }
 
 const uploadBtn = document.getElementById("upload");
-if (uploadBtn) addEventListener("click", uploadImage)
+if (uploadBtn) addEventListener("click", uploadImage)*/
 
 
 
 
 /////////////////////////// Get All Products (Home page)
 
-let homeProducts = document.getElementById("home-products");
+/*let homeProducts = document.getElementById("home-products");
 
 const getAllProducts = async () => {
   try {
@@ -290,4 +332,4 @@ const getAllProducts = async () => {
   }
 }
 
-if (homeProducts) getAllProducts();
+if (homeProducts) getAllProducts();*/
